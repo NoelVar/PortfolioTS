@@ -13,7 +13,8 @@ import contactRoutes from './routes/contactRoutes';
 const app = express();
 
 const corsOption = {
-    origin: ['http://localhost:3000', 'https://noelvarga.netlify.app/']
+    origin: ['http://localhost:3000', 'https://noelvarga.netlify.app'],
+    credentials: true
 }
 
 // CORS
