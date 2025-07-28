@@ -1,0 +1,116 @@
+@import '../../../css/index.css';
+
+@keyframes opening {
+    0% {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        transform: scale(0.1);
+    }
+    100% {}
+}
+
+.card {
+    width: 300px;
+    height: 400px;
+    background-color: var(--accent3);
+    color: var(--white);
+    border: 1px solid var(--accent1);
+    transition: .3s ease;
+    z-index: 0;
+}
+
+.card:hover {
+    cursor: pointer;
+    border: 1px solid var(--white);
+    transform: translateY(-10px);
+    transition: .3s ease;
+}
+
+.card .card-body-closed {
+    overflow: hidden;
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+}
+
+.card .card-body a {
+    color: var(--accent1);
+}
+
+.card .card-body a:hover {
+    color: var(--accent2);
+}
+
+.card img {
+    height: 45%;
+    object-fit: cover;
+    /* mask-image: linear-gradient(180deg, var(--primary) 40%, transparent); */
+}
+
+.card .card-title {
+    font-weight: 600;
+}
+
+.card .card-subtitle {
+    color: var(--white-muted);
+    font-style: italic;
+}
+
+.open {
+    width: 90%;
+    height: 60%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: .8s ease;
+    z-index: 2;
+    animation: opening .5s ease;
+    overflow-y: scroll;
+    scrollbar-color: var(--accent1) var(--primary);
+    scrollbar-width: thin;
+}
+
+.open img {
+    display: none;
+}
+
+.open:hover {
+    cursor: auto;
+    border: 1px solid var(--accent1);
+    transform: translate(-50%, -50%);
+    transition: .8s ease;
+}
+
+.closed {
+    display: none;
+}
+
+.card-backdrop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--backdrop);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+    .card{
+        width: 350px;
+        height: 450px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .card-title{
+        font-size: 25px;
+    }
+
+    .card-subtitle {
+        font-size: 20px;
+    }
+}

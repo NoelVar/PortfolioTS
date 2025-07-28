@@ -1,0 +1,82 @@
+.education-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30%;
+}
+
+.education-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--white);
+    max-width: 600px;
+}
+
+.education-content img {
+    height: 200px;
+}
+
+.education-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--secondary);
+    /* filter: blur(8px); */
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.education-text h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    .education-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .education-text .timeframe1::after {
+        content: " (2022 - 2025)";
+        font-size: .8rem;
+        color: var(--accent1);
+    }
+
+    .education-text .timeframe2::after {
+        content: " (2025 - present day)";
+        font-size: .8rem;
+        color: var(--accent1);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .education-card {
+        width: 95%;
+        margin: auto;
+        font-size: 20px;
+    }
+
+    .education-card img  {
+        height: 100px;
+    }
+
+    .education-text .timeframe1::after {
+        content: " (2022 - 2025)";
+        font-size: 1rem;
+        color: var(--accent1);
+    }
+
+    .education-text .timeframe2::after {
+        content: " (2025 - present day)";
+        font-size: 1rem;
+        color: var(--accent1);
+    }
+
+    .education-text h3 {
+        margin-bottom: 1.5rem;
+    }
+}

@@ -1,0 +1,98 @@
+@keyframes appear {
+    0% {scale: 0.2; opacity: 0; transform: rotate(-20deg);}
+    100% {scale: 1; opacity: 1;}
+}
+
+.hero-main {
+    background: 
+        linear-gradient(
+          rgba(0, 0, 0, 0.6), 
+          rgba(0, 0, 0, 0.6)
+        ),
+        url('../../../public/london-hero.jpg');
+    background-size: 100% 130%;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    border-bottom: 2px solid var(--accent1);
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 150px;
+    animation: appear 1s ease;
+}
+
+.hero-content a {
+    text-align: center;
+    text-decoration: none;
+}
+
+.heading-CTA {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../public/london-text.JPG');
+    background-size: 50%;
+    -webkit-background-clip: text;
+    color: var(--white);
+}
+
+.heading-CTA h1 {
+    font-size: 70px;
+    font-weight: 600;
+    color: transparent;
+}
+
+.heading-CTA button {
+    margin: 20px 80px;
+}
+
+.hero-image .image {
+    width: 400px;
+    border-radius: 20px;
+    border: 3px solid var(--white);
+    transition: .2s ease;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .hero-main {
+        width: 100%;
+    }
+
+    .hero-content {
+        gap: 20px;
+        flex-direction: column-reverse;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .hero-content {
+        gap: 50px;
+    }
+
+    .heading-CTA h1 {
+        font-size: 60px;
+    }
+
+    .hero-image .image {
+        width: 350px;
+    }
+
+    .hero-main {
+        background-size: 300% 130%;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+
+}

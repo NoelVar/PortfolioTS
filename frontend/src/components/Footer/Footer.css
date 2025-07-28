@@ -1,0 +1,220 @@
+.footer {
+    background: 
+        linear-gradient(
+          rgba(0, 0, 0, 0.6), 
+          rgba(0, 0, 0, 0.6)
+        ),
+        url('../../../public/london-footer.jpg');
+    background-size: 100% 130%;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10rem;
+    border-top: 2px solid var(--accent1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 150px;
+    width: 80%;
+    margin: auto;
+}
+
+.footer-form {
+  width: 40%;
+}
+
+.footer-form label {
+  color: var(--accent1);
+}
+
+.footer-form input, .footer-form textarea{
+  border: 2px solid var(--accent1);
+}
+
+.footer-resume {
+  background-color: var(--accent4);
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  width: 40%;
+  min-height: 400px;
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-resume b {
+  color: var(--accent1);
+}
+
+.footer-resume a {
+  font-size: 40px;
+  transition: .2s ease;
+}
+
+.footer-resume a:hover {
+  transform: translateY(-2px);
+  scale: 1.05;
+  transition: .2s ease;
+}
+
+.footer-resume h3 {
+  font-size: 22px;
+  margin-top: 20px;
+  color: var(--accent1);
+}
+
+.resume {
+  padding: 2px;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid var(--black);
+  color: var(--black);
+}
+
+.links > a {
+   margin: 20px;
+   color: var(--accent1);
+}
+
+.icon {
+  transition: .2s ease;
+}
+
+.icon:hover {
+  transform: translateY(-2px);
+  scale: 1.05;
+  transition: .2s ease-in-out;
+}
+
+.contact-me {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../../public/london-text.JPG');
+  background-size: 60%;
+  -webkit-background-clip: text;
+}
+
+.contact-me h1 {
+  margin: 40px 0;
+  font-weight: 600;
+  color: transparent;
+}
+
+.copyright {
+  margin-top: 50px;
+  text-align: center;
+  color: var(--white);
+  font-size: 15px;
+}
+
+.muted {
+  opacity: 30%;
+  font-size: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .footer-content{
+        flex-direction: column;
+    }
+    
+    .contact-me h1 {
+      font-size: 40px;
+    }
+
+    .footer-content {
+      width: 80%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-form {
+      width: 100%;
+    }
+
+    .footer-form input {
+      height: 80px;
+      font-size: 20px;
+    }
+
+    .footer-form textarea {
+      height: 150px;
+      font-size: 20px;
+    }
+
+    .footer-resume {
+      width: 90%;
+      font-size: 20px;
+    }
+
+    .footer-resume h3 {
+      font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+  .contact-me {
+    justify-content: baseline;
+    align-items: baseline;
+  }
+  
+  .contact-me h1 {
+    font-size: 40px;
+  }
+
+  .footer-content {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-form {
+    width: 100vw;
+  }
+
+  .footer-form input {
+    height: 80px;
+    font-size: 20px;
+  }
+
+  .footer-form textarea {
+    height: 150px;
+    font-size: 20px;
+  }
+
+  .footer-resume {
+    width: 90%;
+    font-size: 20px;
+  }
+
+  .footer-resume h3 {
+    font-size: 30px;
+  }
+
+  .copyright {
+    font-size: 20px;
+  }
+
+  .resume {
+    padding: 5px;
+  }
+
+  .icon {
+    transition: .2s ease;
+    font-size: 50px;
+  }
+}

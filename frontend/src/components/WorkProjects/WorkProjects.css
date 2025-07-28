@@ -1,0 +1,39 @@
+@import '../../css/index.css';
+
+.project-container {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    overflow-x: scroll;
+    scrollbar-color: var(--accent1) var(--primary);
+    scrollbar-width: thin;
+}
+
+.single-card-container {
+    margin: 20px;
+}
+
+.card-header {
+    text-align: right;
+}
+
+@media only screen and (max-width: 1000px) {
+    .project-container {
+        width: 450px;
+        height: 500px;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .project-container {
+        width: 90%;
+        height: 500px;
+        flex-direction: column;
+    }
+}
