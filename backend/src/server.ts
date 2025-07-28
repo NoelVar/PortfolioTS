@@ -6,15 +6,14 @@ import env from './util/validateEnv';
 // constants/variables
 const port = env.PORT;
 
-// Connecting to DB
+// Start server immediately
+const server = app.listen(port, () => {
+    console.log('Server is running on port: ' + port);
+});
+
+// Connect to MongoDB in background
 mongoose.connect(env.MONGO_CONN)
-    .then(() => {
-        console.log("Mongoose connected")
-        // starting server
-        app.listen(port, () => {
-            console.log('Server is running on port: ' + port);
-        });
-    })
+    .then(() => console.log("Mongoose connected"))
     .catch(console.error);
 
 // End of Document --------------------------------------------------------------------------------
