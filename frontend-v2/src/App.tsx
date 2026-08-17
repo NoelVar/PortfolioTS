@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
-import Landing from "./components/Landing/Landing"
-import Splash from "./components/SplashScreen/Splash"
+import {Routes, Route} from 'react-router-dom'
+import Splash from "./components/SplashScreen/Code_Splash"
+import Home from "./components/Frame/Frame";
 
 function App() {
-  // () => !JSON.parse(localStorage.getItem("showedSplash") || "false"
-  const [showSplash, setShowSplash] = useState(true)
+  const [showSplash, setShowSplash] = useState(
+    () => !JSON.parse(localStorage.getItem("showedSplash") || "false")
+  )
 
   useEffect(() => {
     setTimeout(() => {
       setShowSplash(false);
-      // localStorage.setItem("showedSplash", JSON.stringify(true));
+      localStorage.setItem("showedSplash", JSON.stringify(true));
     }, 7500);
   }, []);
 
@@ -18,7 +20,14 @@ function App() {
       {showSplash ? (
       <Splash />
       ) : (
-      <Landing />
+        <>
+        <Routes>
+          <Route
+            path='/'
+            element={<Home />}
+          />
+        </Routes>
+      </>
       )}
     </div>
   )

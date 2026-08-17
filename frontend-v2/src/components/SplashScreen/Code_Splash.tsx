@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Splash = () => {
     return (  
         <div className="bg-black text-white w-full min-h-screen flex items-center justify-center p-4 md:p-10 animate-disapear">
