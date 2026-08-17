@@ -1,10 +1,48 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faCopy} from '@fortawesome/free-regular-svg-icons';
 import { faTriangleExclamation, faMagnifyingGlass, faCodeBranch, faBugSlash, faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Frame = () => {
+    const [activeTab, setActiveTab] = useState('')
+
+    const handleEvent = (e) => {
+        const id = e.target.id;
+        setActiveTab(id)
+    }
+
+    const codeSnippet = `function greet(name) { 
+    if (!name) return 'Hello, Stranger!';
+     return \`Hello, \${name}!
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd
+     asd`;
+
+    const selectedTabStyle = 'bg-[#282a36] px-6 h-full flex items-center border-t-2 border-[#ff79c6] cursor-pointer whitespace-nowrap shrink-0';
+    const notSelectedTabStyle = 'bg-[#22222c] px-6 h-full flex items-center border-r border-[#30363d] text-[#7a7b7f] cursor-pointer whitespace-nowrap shrink-0 hover:text-white';
+
     return (
-        <div className="flex h-screen overflow-hidden flex-col bg-[#282a36] text-white">
+        <div className="flex h-screen overflow-hidden flex-col text-white bg-[#282a36]">
             {/* Title Bar */}
             <div className="w-full bg-[#21222c] h-8 flex items-center justify-center text-xs border-b border-[#313340]">
                 <p>Noel Varga's Portfolio</p>
@@ -40,31 +78,39 @@ const Frame = () => {
                 <div className='flex-1 flex flex-col min-w-0 min-h-0'>
                     {/* Title Bar/Headers */}
                     <div className='bg-[#191a21] w-full h-15 md:h-10 flex text-sm border-b border-[#313340] overflow-x-auto flex-nowrap shrink-0'>
-                        <div className='bg-[#282a36] px-6 h-full flex items-center border-t-2 border-[#ff79c6] cursor-pointer whitespace-nowrap shrink-0'>
-                            About
+                        <div id='about' onClick={e => handleEvent(e)} className={activeTab == 'about' ? selectedTabStyle : notSelectedTabStyle}>
+                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> About.tsx
                         </div>
-                        <div className='bg-[#22222c] px-6 h-full flex items-center border-r border-[#30363d] cursor-pointer whitespace-nowrap shrink-0 hover:text-white'>
-                            Projects
+                        <div id='projects' onClick={e => handleEvent(e)} className={activeTab == 'projects' ? selectedTabStyle : notSelectedTabStyle}>
+                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> Projects.tsx
                         </div>
-                        <div className='bg-[#22222c] px-6 h-full flex items-center border-r border-[#30363d] cursor-pointer whitespace-nowrap shrink-0 hover:text-white'>
-                            Experience
+                        <div id='experience' onClick={e => handleEvent(e)} className={activeTab == 'experience' ? selectedTabStyle : notSelectedTabStyle}>
+                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> Experience.tsx
                         </div>
-                        <div className='bg-[#22222c] px-6 h-full flex items-center border-r border-[#30363d] cursor-pointer whitespace-nowrap shrink-0 hover:text-white'>
-                            Contact
+                        <div id='contact' onClick={e => handleEvent(e)} className={activeTab == 'contact' ? selectedTabStyle : notSelectedTabStyle}>
+                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> Contact.tsx
                         </div>
                     </div>
 
                     {/* Editor Workspace View */}
-                    <div className='h-full overflow-y-auto p-5 leading-relaxed'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus urna, tincidunt sed felis at, vestibulum tempor elit. Donec sed lorem non nisi blandit fermentum id ut ligula. Mauris non leo nibh. Proin id dapibus mauris. Fusce fermentum, augue nec accumsan varius, lorem neque accumsan nibh, sit amet dignissim urna sem et ex. In dapibus lorem nec pharetra commodo. Nulla consequat porttitor ornare. Duis commodo fermentum arcu at imperdiet. Phasellus cursus, erat nec sagittis lobortis, eros nibh rhoncus ante, quis ullamcorper lacus velit eu leo. Pellentesque eget congue nulla. Morbi quis nisl nisl. Proin vel dolor velit. Vestibulum venenatis ligula vel nibh viverra, id vehicula leo laoreet. Nam eget aliquam augue, ac tincidunt dui. Maecenas lobortis nunc quam, eu laoreet dui varius a. Nulla vestibulum purus non scelerisque mattis.
-
-                        Maecenas vulputate libero sed orci imperdiet, id ullamcorper mi dictum. Sed venenatis diam erat, vel convallis lorem pulvinar id. Quisque viverra nibh ac enim mattis iaculis. Cras massa risus, sollicitudin non erat nec, semper gravida risus. Mauris feugiat, dui ac euismod mattis, est eros faucibus est, quis lacinia nisi enim ut ex. Ut non eleifend erat. Nam non nibh volutpat, egestas enim sit amet, vehicula sem.
-
-                        Nam eleifend urna quis luctus ultricies. In ultricies felis ac arcu scelerisque fermentum. In augue enim, posuere a ipsum eget, euismod varius lectus. Phasellus commodo laoreet diam ut sollicitudin. Aliquam consequat quam massa, non tempor leo congue id. Sed lobortis eget nulla ut iaculis. Morbi posuere fringilla malesuada. Donec interdum pretium enim, a hendrerit metus vulputate vel. Quisque feugiat lorem at ligula vulputate rhoncus. Fusce eu accumsan ante, ut mollis tellus. Nam non neque aliquam, dapibus lectus vel, varius arcu. Donec finibus, eros et ultrices rutrum, sapien lacus tempor arcu, sit amet pretium turpis turpis vel mi. In finibus congue nisl nec pretium.
-
-                        Aliquam finibus turpis sit amet erat tempor, ut egestas tortor placerat. Nulla enim libero, vehicula hendrerit mi nec, dictum ullamcorper quam. Vivamus aliquam, ex id congue gravida, est lacus pretium magna, a volutpat libero sem in mi. Pellentesque orci lacus, imperdiet a lobortis sit amet, consequat ut justo. Duis nec quam venenatis orci efficitur sollicitudin. Donec at posuere sapien. Proin interdum arcu orci, condimentum lacinia orci gravida sit amet. Sed pretium mauris at nisl dictum ullamcorper. Maecenas imperdiet dictum felis nec elementum. Morbi dignissim iaculis urna a porta. Proin sit amet metus ut ipsum feugiat lacinia a a purus. Fusce laoreet iaculis urna, quis eleifend nunc hendrerit hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc in orci dignissim, elementum ligula ac, sollicitudin purus.
-
-                        Aliquam erat volutpat. Maecenas luctus non ante nec molestie. Duis eu mattis nisl. Donec ut congue ligula. Etiam euismod eros vel dui euismod molestie. Sed sollicitudin augue mauris. Fusce consectetur a ligula et ornare. Nulla sagittis vulputate eros, id consequat nisi auctor at. Donec laoreet, quam dapibus varius tincidunt, felis nunc consectetur purus, vitae vehicula augue tellus at dolor. Nam tempor fermentum semper. Vestibulum ac luctus nunc, id consequat orci. Donec eleifend massa a finibus porta. Vestibulum id consectetur orci. Ut non pulvinar mauris, non finibus quam.
+                    <div className='h-full overflow-y-auto leading-relaxed'>
+                        {activeTab == ''
+                        ?   
+                            <>
+                                <img src='/logo.png' alt="React Logo" className='opacity-30 w-50 m-auto pt-30'/>
+                                <p className='text-center text-[#7a7b7f]'>No view is selected</p>
+                            </>
+                        :
+                            <SyntaxHighlighter
+                                language="javascript"
+                                style={dracula}
+                                showLineNumbers={true}
+                                lineProps={{style: {wordBreak: 'break-all', whiteSpace: 'pre-wrap'}}}
+                                wrapLines={true}
+                                >
+                                {codeSnippet}
+                            </SyntaxHighlighter>
+                        }
                     </div>
                 </div>
             </div>
