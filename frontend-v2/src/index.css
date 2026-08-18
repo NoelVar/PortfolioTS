@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* @theme {
+@theme {
   --font-display: "Courier New", Courier, monospace; 
 }
 
@@ -41,10 +41,10 @@
     }
     100% { 
       opacity: 0;
-      background-color: green;
+      background-color: #21222c;
      }
   }
-} */
+}
 
 :root {
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
