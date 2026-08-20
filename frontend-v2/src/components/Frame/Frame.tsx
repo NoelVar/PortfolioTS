@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faFile} from '@fortawesome/free-regular-svg-icons';
-import { faTriangleExclamation, faCodeBranch, faBugSlash, faClose, faTerminal, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faFile, faImage} from '@fortawesome/free-regular-svg-icons';
+import { faTriangleExclamation, faCodeBranch, faBugSlash, faClose, faTerminal, faEye, faEyeSlash, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faHtml5, faLinkedinIn, faReact } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -18,6 +18,10 @@ const Frame = ({ mode: propMode }: FrameProps) => {
     
     const [activeTab, setActiveTab] = useState('')
     const [consoleOpen, setConsoleOpen] = useState(true)
+    const [enteredText, setEnteredText] = useState('')
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [message, setMessage] = useState('')
     
     const currentModeData = portfolioData[mode];
     const activeContent = currentModeData[activeTab as keyof typeof currentModeData];
@@ -29,6 +33,25 @@ const Frame = ({ mode: propMode }: FrameProps) => {
 
     const handleToggle = () => {
         setConsoleOpen(!consoleOpen)
+    }
+
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            const trimmed = enteredText.trim()
+
+            if (trimmed.startsWith("email -s ")) {
+                const email = trimmed.replace("email -s", "").trim()
+                console.log(email)
+            } else if (trimmed.startsWith("name -s ")) {
+                const name = trimmed.replace("name -s", "").trim()
+                console.log(name)
+            } else if (trimmed.startsWith("msg -s ")) {
+                const msg = trimmed.replace("msg -s", "").trim()
+                console.log(msg)
+            } else {
+                console.log("ERROR: Invalid format. Use <cmd> -s <value>")
+            }
+        }
     }
 
     const selectedTabStyle = 'bg-[#282a36] px-6 h-full flex items-center border-t-2 border-[#ff79c6] cursor-pointer whitespace-nowrap shrink-0';
@@ -84,6 +107,12 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                         onClick={handleToggle}
                         className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                     />
+                    <a href='/'>
+                        <FontAwesomeIcon 
+                            icon={faUsers}
+                            className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
+                        />
+                    </a>
                 </div>
 
                 {/* Editor Area */}
@@ -101,11 +130,14 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                         <div id='Projects.json' onClick={e => handleEvent(e)} className={activeTab == 'Projects.json' ? selectedTabStyle : notSelectedTabStyle}>
                             <span className='text-yellow-500 pr-2'>&#123;&#125;</span> Projects.json
                         </div>
-                        <div id='Experience.tsx' onClick={e => handleEvent(e)} className={activeTab == 'Experience.tsx' ? selectedTabStyle : notSelectedTabStyle}>
-                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> Experience.tsx
+                        <div id='Experience.json' onClick={e => handleEvent(e)} className={activeTab == 'Experience.json' ? selectedTabStyle : notSelectedTabStyle}>
+                            { mode == 'technical'
+                                ? <><span className='text-yellow-500 pr-2'>&#123;&#125;</span> Experience.json</>
+                                : <><FontAwesomeIcon icon={faHtml5} className='text-orange-600 pr-2'/> Experience.html</>
+                            }
                         </div>
-                        <div id='Contact.tsx' onClick={e => handleEvent(e)} className={activeTab == 'Contact.tsx' ? selectedTabStyle : notSelectedTabStyle}>
-                            <FontAwesomeIcon icon={faReact} className='text-sky-500 pr-2'/> Contact.tsx
+                        <div id='NoelVarga.jpg' onClick={e => handleEvent(e)} className={activeTab == 'NoelVarga.jpg' ? selectedTabStyle : notSelectedTabStyle}>
+                            <FontAwesomeIcon icon={faImage} className='text-cyan-600 pr-2'/> NoelVarga.jpg
                         </div>
                     </div>
 
@@ -115,15 +147,36 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                         ?  (
                             <>
                                 <p className='text-[#7a7b7f] text-sm mb-2 pl-5'>{activeContent.path}</p>
+                                {activeContent.language === 'image' ? (
+                                    <div className='flex items-center justify-center p-5'>
+                                        <img src={activeContent.content} alt={activeContent.id} className='max-h-100' />
+                                    </div>
+                                ) : (
                                 <SyntaxHighlighter
                                     language={activeContent.language}
                                     style={dracula}
                                     showLineNumbers={true}
                                     wrapLines={true}
+                                    lineProps={(lineNumber) => {
+                                        const lineText = activeContent.content.split('\n')[lineNumber - 1] || '';
+                                        const hasUrl = lineText.includes('http://') || lineText.includes('https://');
+
+                                        if (hasUrl) {
+                                            return {
+                                                style: { "cursor": 'pointer' },
+                                                onClick: () => {
+                                                    const match = lineText.match(/(https?:\/\/[^\s"]+)/);
+                                                    if (match) window.open(match[0], '_blank');
+                                                }
+                                            };
+                                        }
+                                        return {};
+                                    }}
                                     className='text-sm rounded-lg'
                                 >
                                     {activeContent.content}
                                 </SyntaxHighlighter>
+                                )}
                             </>
                         ) : (
                             <p className='text-center text-[#7a7b7f] pt-50'>No view is selected</p>
@@ -133,10 +186,27 @@ const Frame = ({ mode: propMode }: FrameProps) => {
 
                     {/* Console */}
                     {consoleOpen &&
-                        <div className='w-full h-100 bg-[#22222c] border-t border-[#313340]'>
+                        <div className='w-full max-h-100 bg-[#22222c] border-t border-[#313340] text-wrappb-5'>
                             <button onClick={handleToggle} className='w-full text-right pr-2'>
                                 <FontAwesomeIcon icon={faClose} className='text-[#7a7b7f] cursor-pointer'/>
                             </button>
+                            <div className='pl-2 pr-2 text-sm md:text-md font-display break-words max-h-50 min-h-50 overflow-y-auto '>
+                                <p className='text-[#7a7b7f]'>If you wish to contact me enter the following commands:</p>
+                                <ul className='text-[#7a7b7f] pl-5'>
+                                    <li>name -s [your name here]</li>
+                                    <li>email -s [your@email_address.com]</li>
+                                    <li>msg -s [your message here]</li>
+                                </ul>
+                                <p>C:\Users\{mode}\Documents\Portfolio&gt;&nbsp;
+                                <input 
+                                    type='text'
+                                    autoFocus={true}
+                                    className='w-full md:w-1/2 focus:outline-none'
+                                    onChange={e => setEnteredText(e.target.value)}
+                                    onKeyDown={e => handleEnter(e)}
+                                />
+                                </p>
+                            </div>
                         </div>
                     }
                 </div>
