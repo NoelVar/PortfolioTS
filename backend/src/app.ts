@@ -8,6 +8,8 @@ import createHttpError, { isHttpError } from 'http-errors';
 import morgan from 'morgan';
 import projectRoutes from './routes/projectsRoutes';
 import contactRoutes from './routes/contactRoutes';
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1"]);
 
 // initialising app
 const app = express();

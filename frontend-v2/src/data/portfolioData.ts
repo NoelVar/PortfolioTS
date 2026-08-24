@@ -3,7 +3,6 @@ export interface TabContent {
   path: string;
   language: string;
   content: string;
-  renderedComponent: string; 
 }
 
 export const portfolioData = {
@@ -11,8 +10,87 @@ export const portfolioData = {
     'About.tsx': {
       id: 'About.tsx',
       path: 'src > components > About.tsx',
-      language: "javascript",
-      content: `const Developer = {\n  name: "Noel Varga",\n  role: "MSc Advanced Computing Student",\n  company: "King's College London",\n  education: [\n  {\n    course: "BSc Computer Science",\n    uni: "University of Westminster",\n    grade: "1st Class", // Achieved\n    date_from: "2022-09",\n    date_to: "2025-07"\n  },\n  {\n    course: "MSc Advanced Computing",\n    uni: "King's College London",\n    grade: "2:1 or 1st Class", // Predicted\n    date_from: "2025-09",\n    date_to: "2026-08"\n  }],\n  skills: {\n    programming_languages: ["JavaScript", "TypeScript", "Python", "Java"],\n    web_software_dev: [\n      "React",\n      "Node.js",\n      "Express.js",\n      "HTML/CSS",\n      "MongoDB",\n      "SQL",\n      "Git",\n      "REST APIs",\n      "Agile",\n      "DSDM",\n      "Requirements Engineering",\n      "Testing",\n      "User Focused Design"\n    ],\n    machine_learning: [\n      "Deep Learning",\n      "CNNs",\n      "Vision Transformer",\n      "Image Classification",\n      "Semantic Segmentation",\n      "PyTorch"\n    ],\n    research: [\n      "Literature Review",\n      "Data Analysis",\n      "Stakeholder Analysis",\n      "Presentation Skills",\n      "Project Planning"\n    ]\n  },\n  hobbies: ["Cooking", "Photography", "Guitar", "Reading", "Development"] \n };`,
+      language: "typescript",
+      content: `interface SkillsProps {
+  programming_languages: string[];
+  web_software_dev: string[];
+  machine_learning: string[];
+  research: string[];
+}
+
+interface EducationProps {
+  course: string;
+  uni: string;
+  grade: "1st Class" | "2:1" | "2:2" | string;
+  date_from: string;
+  date_to: string;
+}
+
+interface FrameProps {
+  name: string;
+  role: string;
+  company: string;
+  education: EducationProps[];
+  skills: SkillsProps;
+  hobbies: string[];
+}
+
+const Developer: FrameProps = {
+  name: "Noel Varga",
+  role: "MSc Advanced Computing Student",
+  company: "King's College London",  
+  education: [
+    {    
+      course: "BSc Computer Science",
+      uni: "University of Westminster",
+      grade: "1st Class", // Achieved 
+      date_from: "2022-09",    
+      date_to: "2025-07"  
+    },  
+    {    
+      course: "MSc Advanced Computing",
+      uni: "King's College London",
+      grade: "2:1 or 1st Class", // Predicted
+      date_from: "2025-09",
+      date_to: "2026-08"  
+    }
+  ],
+  skills: {
+    programming_languages: ["JavaScript", "TypeScript", "Python", "Java"],
+    web_software_dev: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "HTML/CSS",
+      "MongoDB",
+      "SQL",
+      "Git",
+      "REST APIs",
+      "Agile",
+      "DSDM",
+      "Requirements Engineering",
+      "Testing",
+      "User Focused Design"
+    ],
+    machine_learning: [
+      "Deep Learning",
+      "CNNs",
+      "Vision Transformer",
+      "Image Classification",
+      "Semantic Segmentation",
+      "PyTorch"
+    ],
+    research: [
+      "Literature Review",
+      "Data Analysis",
+      "Stakeholder Analysis",
+      "Presentation Skills",
+      "Project Planning"
+    ]
+  },
+  hobbies: ["Cooking", "Photography", "Guitar", "Reading", "Development"]
+};
+`,
     },
     'Projects.json': {
       id: 'Projects.json',
