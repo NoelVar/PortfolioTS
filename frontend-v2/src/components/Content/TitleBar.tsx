@@ -5,6 +5,7 @@ interface FrameProps {
 }
 
 const TitleBar = ({ mode: propMode }: FrameProps) => {
+    // Finding selected mode from URL
     const [searchParams] = useSearchParams();
     const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
 

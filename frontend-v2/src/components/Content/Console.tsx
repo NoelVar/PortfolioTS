@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { useSearchParams } from "react-router-dom";
 
 interface ConsoleProps {
-    mode?: 'technical' | 'nonTechnical';
     name: string;
     email: string;
     message: string;
@@ -17,7 +15,6 @@ interface ConsoleProps {
 }
 
 const Console = ({ 
-        mode: propMode,
         name, 
         email, 
         message, 
@@ -29,9 +26,8 @@ const Console = ({
         setEnteredText, 
         handleEnter 
     }: ConsoleProps) => {
-    const [searchParams] = useSearchParams();
-    const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
 
+    // reusable styling
     const helpStyling = "flex flex-col md:flex-row justify-between";    
 
     return (
@@ -40,7 +36,7 @@ const Console = ({
                 <FontAwesomeIcon icon={faClose} className='text-[#7a7b7f] cursor-pointer'/>
             </button>
             <div className='pl-2 pr-2 text-sm md:text-md font-display break-words max-h-50 min-h-50 overflow-y-auto '>
-                <p className='text-[#7a7b7f]'>If you wish to contact me enter the following commands:</p>
+                {/* <p className='text-[#7a7b7f]'>If you wish to contact me enter the following commands:</p>
                 <ul className='text-[#7a7b7f] pl-5'>
                     <li>name -contact [your name here]</li>
                     <li>email -contact [your@email_address.com]</li>
@@ -50,8 +46,8 @@ const Console = ({
                 <p className='text-[#7a7b7f]'>For further help please use:</p>
                 <ul className='text-[#7a7b7f] pl-5'>
                     <li>help</li>
-                </ul>
-                <p>C:\Users\{mode}\Documents\Portfolio&gt;&nbsp;
+                </ul> */}
+                <p>C:\Users\technical\Documents\Portfolio&gt;&nbsp;
                 <input 
                     type='text'
                     autoFocus={true}

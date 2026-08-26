@@ -100,3 +100,57 @@
   background: #21222c;
   color: white;
 }
+
+.mainTitle {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dynamicHTMLstyling hr {
+  opacity: 50%;
+  margin-bottom: 1.25rem;
+}
+
+.dynamicHTMLstyling p {
+  margin-top: 1rem;
+}
+
+.dynamicHTMLstyling h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dynamicHTMLstyling h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dynamicHTMLstyling ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+.linkContainer {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.link {
+  background-color: #bbbebf;
+  color: #21222c;
+  padding: 4px;
+  border-radius: 2px;
+}
+
+.link:hover {
+  background-color: #8c8e8e;
+  color: #21222c;
+  padding: 4px;
+}

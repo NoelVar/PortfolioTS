@@ -1,4 +1,4 @@
-import { useState, type KeyboardEvent, type MouseEvent as ReactMouseEvent } from 'react';
+import { useState, type FormEvent, type KeyboardEvent, type MouseEvent as ReactMouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { portfolioData } from '../../data/portfolioData';
 import TitleBar from '../Content/TitleBar';
@@ -7,12 +7,14 @@ import Tabs from '../Content/Tabs';
 import Workspace from '../Content/Workspace';
 import Console from '../Content/Console';
 import Footer from '../Content/Footer';
+import ContactForm from '../Content/ContactForm';
 
 interface FrameProps {
     mode?: 'technical' | 'nonTechnical';
 }
 
 const Frame = ({ mode: propMode }: FrameProps) => {
+    // Separating the selected view mode from the url
     const [searchParams] = useSearchParams();
     const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
     
@@ -26,18 +28,66 @@ const Frame = ({ mode: propMode }: FrameProps) => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     
+    // Retriving portfolio data based on mode
     const currentModeData = portfolioData[mode];
     const activeContent = currentModeData[activeTab as keyof typeof currentModeData];
 
+    // Tab selection function
     const handleEvent = (e: ReactMouseEvent<HTMLDivElement>) => {
         const id = e.currentTarget.id;
         setActiveTab(id)
     }
 
+    // Toggle "console" function
     const handleToggle = () => {
         setConsoleOpen(!consoleOpen)
     }
 
+    // Handle contact form submission
+    const handleSumbit = async (e?: FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
+        setError('');
+        setSuccess('');
+
+        if (name == '' || email == '' || message == '') {
+            setError("Please fill in all fields.")
+            return
+        }
+        try {
+            const response = await fetch('http://localhost:5000/api/contact', 
+                {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({name, email, message})
+                }
+            );
+
+            if (response.ok) {
+                setName('');
+                setEmail('');
+                setMessage('');
+                setError('');
+                setShowHelp(false)
+                setSuccess('Message sent successfully.')
+            } else {
+                // Isolating status and message from error
+                const errorStatus = response.status;
+                let errorMsg = response.statusText;
+                if (errorStatus !== 500) {
+                    const errorData = await response.json();
+                    errorMsg = errorData.error || errorMsg;
+                }
+                setError(`ERROR ${errorStatus}: ${errorMsg}`)
+            }
+        } catch (error) {
+            console.error(error);
+            setError(`ERROR 500: Server Error`)
+        }
+    }
+
+    // Handiling "console" enter
     const handleEnter = async (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             const trimmed = enteredText.trim()
@@ -56,31 +106,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                 const msg = trimmed.replace("msg -contact", "").trim()
                 setMessage(msg)
             } else if (trimmed.startsWith("msg -send")){
-                try {
-                    const response = await fetch('http://localhost:5000/api/contact', 
-                        {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({name, email, message})
-                        }
-                    );
-
-                    if (response.ok) {
-                        setName('');
-                        setEmail('');
-                        setMessage('');
-                        setError('');
-                        setShowHelp(false)
-                        setSuccess('Message sent successfully.')
-                    } else {
-                        setError(`ERROR ${response.status}: ${response.statusText}`)
-                    }
-                } catch (error) {
-                    console.error(error);
-                    setError(`ERROR 500: Server Error`)
-                }
+                handleSumbit()
             } else if (trimmed.startsWith("help")) {
                 setShowHelp(true)
             } else if (trimmed.startsWith("clear")) {
@@ -125,19 +151,36 @@ const Frame = ({ mode: propMode }: FrameProps) => {
 
                     {/* Console */}
                     {consoleOpen &&
-                        <Console 
-                            mode={mode} 
-                            name={name}
-                            email={email}
-                            message={message}
-                            error={error} 
-                            success={success}
-                            showHelp={showHelp} 
-                            handleToggle={handleToggle} 
-                            enteredText={enteredText}
-                            setEnteredText={setEnteredText} 
-                            handleEnter={handleEnter}
-                        />
+                        <>
+                        {mode == 'technical'
+                        ?
+                            <Console 
+                                name={name}
+                                email={email}
+                                message={message}
+                                error={error} 
+                                success={success}
+                                showHelp={showHelp} 
+                                handleToggle={handleToggle} 
+                                enteredText={enteredText}
+                                setEnteredText={setEnteredText} 
+                                handleEnter={handleEnter}
+                            />
+                        :
+                            <ContactForm 
+                                name={name}
+                                email={email}
+                                message={message}
+                                error={error} 
+                                success={success}
+                                setName={setName} 
+                                setEmail={setEmail} 
+                                setMessage={setMessage} 
+                                handleToggle={handleToggle} 
+                                handleSubmit={handleSumbit}
+                            />
+                        }
+                        </>
                     }
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile} from '@fortawesome/free-regular-svg-icons';
-import { faCodeBranch, faTerminal, faEye, faEyeSlash, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faCodeBranch, faTerminal, faEye, faEyeSlash, faUsers, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { useSearchParams } from "react-router-dom";
 
@@ -10,6 +10,7 @@ interface ActivityBarProps {
 }
 
 const ActivityBar = ({ mode: propMode, onToggleConsole }:  ActivityBarProps) => {
+    // Mode from URL
     const [searchParams] = useSearchParams();
     const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
 
@@ -49,11 +50,20 @@ const ActivityBar = ({ mode: propMode, onToggleConsole }:  ActivityBarProps) => 
                     />
                 </a>
             }
-            <FontAwesomeIcon 
-                icon={faTerminal}
-                onClick={onToggleConsole}
-                className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
-            />
+            {mode == 'technical' 
+            ?
+                <FontAwesomeIcon 
+                    icon={faTerminal}
+                    onClick={onToggleConsole}
+                    className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
+                />
+            :
+                <FontAwesomeIcon 
+                    icon={faEnvelope}
+                    onClick={onToggleConsole}
+                    className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
+                />
+            }
             <a href='/'>
                 <FontAwesomeIcon 
                     icon={faUsers}

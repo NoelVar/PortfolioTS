@@ -1,12 +1,18 @@
+import { useSearchParams } from 'react-router-dom';
 import type { TabContent } from '../../data/portfolioData';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import CodeSyntax from './CodeSyntax';
+import VisualSyntax from './VisualSyntax';
 
 interface WorkspaceProps {
+    mode?: 'technical' | 'nonTechnical';
     activeContent?: TabContent;
 }
 
-const Workspace = ({ activeContent }: WorkspaceProps) => {
+const Workspace = ({ mode: propMode, activeContent }: WorkspaceProps) => {
+    // mode from URL
+    const [searchParams] = useSearchParams();
+    const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
+    
     return (
         <div className='h-full overflow-y-auto leading-relaxed'>
             {activeContent
@@ -18,30 +24,14 @@ const Workspace = ({ activeContent }: WorkspaceProps) => {
                             <img src={activeContent.content} alt={activeContent.id} className='max-h-100' />
                         </div>
                     ) : (
-                    <SyntaxHighlighter
-                        language={activeContent.language}
-                        style={dracula}
-                        showLineNumbers={true}
-                        wrapLines={true}
-                        lineProps={(lineNumber: number) => {
-                            const lineText = activeContent.content.split('\n')[lineNumber - 1] || '';
-                            const hasUrl = lineText.includes('http://') || lineText.includes('https://');
-
-                            if (hasUrl) {
-                                return {
-                                    style: { "cursor": 'pointer' },
-                                    onClick: () => {
-                                        const match = lineText.match(/(https?:\/\/[^\s"]+)/);
-                                        if (match) window.open(match[0], '_blank');
-                                    }
-                                };
-                            }
-                            return {};
-                        }}
-                        className='text-sm rounded-lg'
-                    >
-                        {activeContent.content}
-                    </SyntaxHighlighter>
+                    <>
+                        {mode == 'technical'
+                        ?
+                            <CodeSyntax activeContent={activeContent} />
+                        :
+                            <VisualSyntax activeContent={activeContent}/>
+                        }
+                    </>
                     )}
                 </>
             ) : (
