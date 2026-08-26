@@ -47,6 +47,7 @@ const Console = ({
                 <ul className='text-[#7a7b7f] pl-5'>
                     <li>help</li>
                 </ul> */}
+                <p className='text-[#7a7b7f]'>Use the console to contact me. Type 'help' to get started.</p>
                 <p>C:\Users\technical\Documents\Portfolio&gt;&nbsp;
                 <input 
                     type='text'
@@ -73,11 +74,11 @@ const Console = ({
                     <p className='text-red-700'>{error}</p>
                 }
                 {showHelp &&
-                    <div className='text-[#7a7b7f] flex flex-col gap-5 md:gap-0 md:w-1/2'>
-                        <p className={helpStyling}>name -contact <span>ADDS OR CHANGES NAME ON CONTACT FORM</span></p>
-                        <p className={helpStyling}>email -contact <span>ADDS OR CHANGES EMAIL ADDRESS ON CONTACT FORM</span></p>
-                        <p className={helpStyling}>msg -contact <span>ADDS OR CHANGES MESSAGE ON CONTACT FORM</span></p>
-                        <p className={helpStyling}>msg -send <span>SENDS MESSAGE/QUERY (IF ALL FIELD ARE FIELD)</span></p>
+                    <div className='text-[#7a7b7f] flex flex-col gap-5 md:gap-0 md:w-3/4'>
+                        <p className={helpStyling}>name -contact [your name here]<span>ADDS OR CHANGES NAME ON CONTACT FORM</span></p>
+                        <p className={helpStyling}>email -contact [your email here]<span>ADDS OR CHANGES EMAIL ADDRESS ON CONTACT FORM</span></p>
+                        <p className={helpStyling}>msg -contact [your message here]<span>ADDS OR CHANGES MESSAGE ON CONTACT FORM</span></p>
+                        <p className={helpStyling}>msg -send <span>SENDS MESSAGE, ONCE ALL 'FIELDS' (name, email, message) ARE FILLED</span></p>
                         <p className={helpStyling}>help <span>PROVIDES DESCRIPTION OF COMMANDS</span></p>
                         <p className={helpStyling}>clear <span>CLEARS COMMAND PROMPT AND VARIABLES</span></p>
                     </div>

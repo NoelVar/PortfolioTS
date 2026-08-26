@@ -354,7 +354,7 @@ const Developer: FrameProps = {
       id: 'NoelVarga.jpg',
       path: 'frontend > public > NoelVarga.jpg',
       language: "image",
-      content:`/me.jpg`
+      content:`/me2.jpg`
     }
   },
   nonTechnical: {
@@ -451,7 +451,7 @@ const Developer: FrameProps = {
         <li>Swin-UPerNet-Weighted achieved 83.18% mIoU, marginally outperforming DeepLabV3-Weighted at 82.95%</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Transformer-Based-Terrain-Perception-for-Off-Road-Environments' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Transformer-Based-Terrain-Perception-for-Off-Road-Environments' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Ant Colony Optimisation Project</h2> <hr>
@@ -474,7 +474,7 @@ const Developer: FrameProps = {
         <li>Full detailed video explanation can be found through the link below</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Ant_Colony_Optimization' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Ant_Colony_Optimization' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Data Visualiser for Lupus Awareness</h2> <hr>
@@ -496,7 +496,7 @@ const Developer: FrameProps = {
         <li>This project was implemented to raise awarness about Lupus for World Lupus Day 2026.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://noelvar.github.io/LupusAwareness/' class='link'>More</a>
+        <a href='https://noelvar.github.io/LupusAwareness/' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Netflix Clone</h2> <hr>
@@ -520,7 +520,7 @@ const Developer: FrameProps = {
         <li>This project was developed based on Shruti Kapoor's course. The app was developed using React, Vite, TypeScript, and Tailwind.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Netflix_Clone' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Netflix_Clone' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Sorting Algorithm Visualiser</h2> <hr>
@@ -540,7 +540,7 @@ const Developer: FrameProps = {
         <li>Project is based on Tech With Tim - Python Sorting Algorithm Visualizer Tutorial. The project was developed as practice and more algorithms were added.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Sort_Visualizer_Python' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Sort_Visualizer_Python' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Classification of Pneumonia MNIST Using CNN</h2> <hr>
@@ -562,7 +562,7 @@ const Developer: FrameProps = {
         <li>The model is trained on the pneumonia_mist dataset, and it achieves around an 80-85% accuracy on unseen data.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/pneumonia_mnist_CNN/' class='link'>More</a>
+        <a href='https://github.com/NoelVar/pneumonia_mnist_CNN/' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Real Time Colour Detector</h2> <hr>
@@ -583,7 +583,7 @@ const Developer: FrameProps = {
         <li>The project utilises the computers webcam, where the provided colour range is isolated and highlighted.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Real_Time_Color_Detection' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Real_Time_Color_Detection' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>EdibleEducation</h2> <hr>
@@ -616,8 +616,8 @@ const Developer: FrameProps = {
         <li>Engineered a working prototype of the platform throughout 2 project iteration cycles.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://edibleeducation.netlify.app/' class='link'>EdibleEducation</a>
-        <a href='https://github.com/NoelVar/FYP_EdibleEducation' class='link'>More</a>
+        <a href='https://edibleeducation.netlify.app/' target="_blank" rel="noreferrer" class='link'>EdibleEducation</a>
+        <a href='https://github.com/NoelVar/FYP_EdibleEducation' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Travel Tales</h2> <hr>
@@ -641,8 +641,8 @@ const Developer: FrameProps = {
         <li>The platform seamlessly integrates real-time country data with personal travel experiences, creating a unique space for travellers to share their adventures and connect with fellow explorers worldwide.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://traveltales-cw2.netlify.app/' class='link'>TravelTales</a>
-        <a href='https://github.com/NoelVar/ASSWP_CW2_SOURCE' class='link'>More</a>
+        <a href='https://traveltales-cw2.netlify.app/' target="_blank" rel="noreferrer" class='link'>TravelTales</a>
+        <a href='https://github.com/NoelVar/ASSWP_CW2_SOURCE' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
 
       <h2>Java Shopping Manager Application</h2> <hr>
@@ -666,7 +666,7 @@ const Developer: FrameProps = {
         <li>It features a terminal-based menu for managers and a graphical user interface (GUI) for customers.</li>
       </ul>
       <div class='linkContainer'>
-        <a href='https://github.com/NoelVar/Java_ShoppingManager/' class='link'>More</a>
+        <a href='https://github.com/NoelVar/Java_ShoppingManager/' target="_blank" rel="noreferrer" class='link'>More</a>
       </div>
       `,
     },
@@ -738,7 +738,7 @@ const Developer: FrameProps = {
       id: 'NoelVarga.jpg',
       path: 'frontend > public > NoelVarga.jpg',
       language: "image",
-      content:`/me.jpg`
+      content:`/me2.jpg`
     }
   }
 };

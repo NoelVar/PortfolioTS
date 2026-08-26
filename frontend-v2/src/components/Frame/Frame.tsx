@@ -18,8 +18,8 @@ const Frame = ({ mode: propMode }: FrameProps) => {
     const [searchParams] = useSearchParams();
     const mode = propMode || (searchParams.get('mode') as 'technical' | 'nonTechnical') || 'technical';
     
-    const [activeTab, setActiveTab] = useState('')
-    const [consoleOpen, setConsoleOpen] = useState(true)
+    const [activeTab, setActiveTab] = useState('About.tsx')
+    const [consoleOpen, setConsoleOpen] = useState(false)
     const [enteredText, setEnteredText] = useState('')
     const [showHelp, setShowHelp] = useState(false)
     const [email, setEmail] = useState('')
@@ -117,7 +117,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                 setMessage('')
                 setSuccess('')
             } else {
-                setError("ERROR: Did not recognise command. Use help for more information.")
+                setError("ERROR: Did not recognise command. Use 'help' for more information.")
             }
         }
     }

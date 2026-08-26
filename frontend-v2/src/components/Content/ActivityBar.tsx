@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile} from '@fortawesome/free-regular-svg-icons';
-import { faCodeBranch, faTerminal, faEye, faEyeSlash, faUsers, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faTerminal, faEye, faEyeSlash, faEnvelope, faHouse, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { useSearchParams } from "react-router-dom";
 
 interface ActivityBarProps {
@@ -16,34 +15,40 @@ const ActivityBar = ({ mode: propMode, onToggleConsole }:  ActivityBarProps) => 
 
     return (
         <div className="bg-[#21222d] md:w-12 border-t md:border-r border-[#313340] flex md:flex-col items-center justify-center md:justify-start py-2">
-            <a href='https://drive.google.com/drive/folders/1KXHINDEZ-KzBOU_FWdQLwvi_p_rmb08v' target="_blank" rel="noreferrer">
+            <a href='/' title="View Selection">
                 <FontAwesomeIcon 
-                    icon={faFile}
+                    icon={faHouse}
                     className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                 />
             </a>
-            <a href='https://www.linkedin.com/in/noel-varga/' target="_blank" rel="noreferrer">
+            <a href='https://drive.google.com/drive/folders/1KXHINDEZ-KzBOU_FWdQLwvi_p_rmb08v' target="_blank" rel="noreferrer" title="CV/Resume">
+                <FontAwesomeIcon 
+                    icon={faFilePdf}
+                    className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
+                />
+            </a>
+            <a href='https://www.linkedin.com/in/noel-varga/' target="_blank" rel="noreferrer" title="LinkedIn">
                 <FontAwesomeIcon 
                     icon={faLinkedinIn}
                     className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                 />
             </a>
-            <a href='https://github.com/NoelVar' target="_blank" rel="noreferrer">
+            <a href='https://github.com/NoelVar' target="_blank" rel="noreferrer" title="GitHub">
                 <FontAwesomeIcon 
-                    icon={faCodeBranch}
+                    icon={faGithub}
                     className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                 />
             </a>
             {mode == 'technical' 
             ?
-                <a href='/portfolio?mode=nonTechnical'>
+                <a href='/portfolio?mode=nonTechnical' title="Switch View">
                     <FontAwesomeIcon 
                         icon={faEye}
                         className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                     />
                 </a>
             :
-                <a href='/portfolio?mode=technical'>
+                <a href='/portfolio?mode=technical' title="Switch View">
                     <FontAwesomeIcon 
                         icon={faEyeSlash}
                         className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
@@ -52,24 +57,22 @@ const ActivityBar = ({ mode: propMode, onToggleConsole }:  ActivityBarProps) => 
             }
             {mode == 'technical' 
             ?
+            <div title="Open Terminal/Contact form">
                 <FontAwesomeIcon 
                     icon={faTerminal}
                     onClick={onToggleConsole}
                     className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                 />
+            </div>
             :
+            <div title="Open Contact form">
                 <FontAwesomeIcon 
                     icon={faEnvelope}
                     onClick={onToggleConsole}
                     className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
                 />
+            </div>
             }
-            <a href='/'>
-                <FontAwesomeIcon 
-                    icon={faUsers}
-                    className='p-5 text-lg cursor-pointer text-[#6272a4] hover:text-white'
-                />
-            </a>
         </div>
     );
 }
