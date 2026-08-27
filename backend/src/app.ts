@@ -21,7 +21,7 @@ const corsOption = {
 
 // CORS
 app.use(cors(corsOption));
-app.options('*', cors(corsOption))
+app.options('/*splat', cors(corsOption))
 
 // Using morgan to log accessed endpoint information
 app.use(morgan("dev"));
