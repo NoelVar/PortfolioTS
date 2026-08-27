@@ -8,12 +8,14 @@ import createHttpError, { isHttpError } from 'http-errors';
 import morgan from 'morgan';
 import projectRoutes from './routes/projectsRoutes';
 import contactRoutes from './routes/contactRoutes';
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1"]);
 
 // initialising app
 const app = express();
 
 const corsOption = {
-    origin: ['http://localhost:3000', 'https://noelvarga.netlify.app'],
+    origin: ['http://localhost:3000', 'https://noelvarga.netlify.app', 'http://localhost:5173'],
     credentials: true
 }
 

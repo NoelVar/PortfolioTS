@@ -29,9 +29,9 @@ export const postContact: RequestHandler = async (req, res, next) => {
 
         const mailOptions ={
             from: env.SOURCE_EMAIL_ADD,
-            to: "varnoel11@gmail.com",
-            subject: `💼BUSINESS💼 from ${name} - ${email}`,
-            text: message,
+            to: "noelvarga-business@outlook.com",
+            subject: `Enquiry from website.`,
+            text: `Message from: ${name} \nEmail Address: ${email}\n${message}`,
         }
 
         transporter.sendMail(mailOptions, (error, info) => {
