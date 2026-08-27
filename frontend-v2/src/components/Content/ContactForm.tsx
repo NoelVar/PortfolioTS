@@ -29,7 +29,8 @@ const ContactForm = ({ name, email, message, error, success, setName, setEmail, 
                 <FontAwesomeIcon icon={faClose} className='text-[#7a7b7f] cursor-pointer'/>
             </button>
             <div className='pl-2 pr-2 text-sm md:text-md font-display break-words max-h-50 min-h-50 overflow-y-auto '>
-                <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+                <form className="flex flex-col items-center" onSubmit={handleSubmit} name="contact" data-netlify='true'>
+                    <input type="hidden" name="form-name" value="contact" />
                     <h1 className="text-lg text-[#bbbebf]">Contact me</h1>
                     <div className={inputContainerStyle}>
                         <label className={labelStyle}>Name</label>
