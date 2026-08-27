@@ -20,7 +20,9 @@ export const postContact: RequestHandler = async (req, res, next) => {
         }
 
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: env.SOURCE_EMAIL_ADD,
                 pass: env.SOURCE_EMAIL_PASS,
@@ -34,17 +36,11 @@ export const postContact: RequestHandler = async (req, res, next) => {
             text: `Message from: ${name} \nEmail Address: ${email}\n${message}`,
         }
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                throw createHttpError(500, "Could not send email" + error)
-            } else {
-                console.log(info)
-                res.status(200).json({ message: "Message has been sent" });
-            }
-        });
+        const info = await transporter.sendMail(mailOptions);
+        return res.status(200).json({ message: "Message has been sent" });
         
     } catch (error) {
-        next(error);
+        return next(createHttpError(500, `Could not send email: ${error}`));
     }
 }
 

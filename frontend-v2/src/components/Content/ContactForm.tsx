@@ -13,9 +13,10 @@ interface ContactFormProps {
     setMessage: (e: string) => void;
     handleToggle: () => void;
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+    isLoading: boolean;
 }
 
-const ContactForm = ({ name, email, message, error, success, setName, setEmail, setMessage, handleToggle, handleSubmit }: ContactFormProps) => {
+const ContactForm = ({ name, email, message, error, success, setName, setEmail, setMessage, handleToggle, handleSubmit, isLoading }: ContactFormProps) => {
     
     // reusable styling
     const inputContainerStyle = "flex flex-col w-full md:w-3/4 my-2"
@@ -66,6 +67,9 @@ const ContactForm = ({ name, email, message, error, success, setName, setEmail, 
                         }
                         {success &&
                             <p className="text-green-700">{success}</p>
+                        }
+                        {isLoading &&
+                            <p className="text-[#7a7b7f]">Loading...</p>
                         }
                     </div>
                     <button type="submit" className="px-4 py-2 my-2 rounded bg-[#6272a4] cursor-pointer text-white hover:bg-[#ff79c6] hover:text-[#21222d]">Send</button>

@@ -27,6 +27,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
     const [message, setMessage] = useState('')
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     
     // Retriving portfolio data based on mode
     const currentModeData = portfolioData[mode];
@@ -48,7 +49,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
         e?.preventDefault();
         setError('');
         setSuccess('');
-
+        setIsLoading(true);
         if (name == '' || email == '' || message == '') {
             setError("Please fill in all fields.")
             return
@@ -69,10 +70,12 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                 setEmail('');
                 setMessage('');
                 setError('');
-                setShowHelp(false)
-                setSuccess('Message sent successfully.')
+                setShowHelp(false);
+                setIsLoading(false);
+                setSuccess('Message sent successfully.');
             } else {
                 // Isolating status and message from error
+                setIsLoading(false);
                 const errorStatus = response.status;
                 let errorMsg = response.statusText;
                 if (errorStatus !== 500) {
@@ -84,6 +87,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
         } catch (error) {
             console.error(error);
             setError(`ERROR 500: Server Error`)
+            setIsLoading(false);
         }
     }
 
@@ -165,6 +169,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                                 enteredText={enteredText}
                                 setEnteredText={setEnteredText} 
                                 handleEnter={handleEnter}
+                                isLoading={isLoading}
                             />
                         :
                             <ContactForm 
@@ -178,6 +183,7 @@ const Frame = ({ mode: propMode }: FrameProps) => {
                                 setMessage={setMessage} 
                                 handleToggle={handleToggle} 
                                 handleSubmit={handleSumbit}
+                                isLoading={isLoading}
                             />
                         }
                         </>
