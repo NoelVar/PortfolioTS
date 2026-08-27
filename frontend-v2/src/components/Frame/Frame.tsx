@@ -44,6 +44,16 @@ const Frame = ({ mode: propMode }: FrameProps) => {
         setConsoleOpen(!consoleOpen)
     }
 
+    const encode = (data: Record<string, string>) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+
+    const emailIsValid = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
     // Handle contact form submission
     const handleSumbit = async (e?: FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
@@ -51,39 +61,49 @@ const Frame = ({ mode: propMode }: FrameProps) => {
         setSuccess('');
         setIsLoading(true);
         if (name == '' || email == '' || message == '') {
-            setError("Please fill in all fields.")
+            setError("Please fill in all fields.");
+            setIsLoading(false);
+            return
+        }
+        if (!emailIsValid(email)) {
+            setError("Email format is not valid.");
+            setIsLoading(false);
             return
         }
         try {
-            const response = await fetch('https://portfolio-typescript.up.railway.app/api/contact', 
-                {
+            fetch('/', {
                     method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: JSON.stringify({name, email, message})
-                }
-            );
-
-            if (response.ok) {
-                setName('');
-                setEmail('');
-                setMessage('');
-                setError('');
-                setShowHelp(false);
-                setIsLoading(false);
-                setSuccess('Message sent successfully.');
-            } else {
-                // Isolating status and message from error
-                setIsLoading(false);
-                const errorStatus = response.status;
-                let errorMsg = response.statusText;
-                if (errorStatus !== 500) {
-                    const errorData = await response.json();
-                    errorMsg = errorData.error || errorMsg;
-                }
-                setError(`ERROR ${errorStatus}: ${errorMsg}`)
-            }
+                    body: encode({
+                        'form-name': 'contact',
+                        'bot-field': '',
+                        name: name.trim(),
+                        email: email,
+                        message: message.trim(),
+                    }),
+                })
+                .then(() => {
+                    setName('');
+                    setEmail('');
+                    setMessage('');
+                    setError('');
+                    setShowHelp(false);
+                    setIsLoading(false);
+                    setSuccess('Message sent successfully.');
+                })
+                .catch((error) => {
+                    // Isolating status and message from error
+                    // setIsLoading(false);
+                    // const errorStatus = response.status;
+                    // let errorMsg = response.statusText;
+                    // if (errorStatus !== 500) {
+                    //     const errorData = await response.json();
+                    //     errorMsg = errorData.error || errorMsg;
+                    // }
+                    setError(`ERROR ${error}`)
+                })
         } catch (error) {
             console.error(error);
             setError(`ERROR 500: Server Error`)
