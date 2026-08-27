@@ -12,6 +12,7 @@ interface ConsoleProps {
     enteredText: string;
     setEnteredText: (e: string) => void;
     handleEnter: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    isLoading: boolean;
 }
 
 const Console = ({ 
@@ -24,7 +25,8 @@ const Console = ({
         handleToggle, 
         enteredText,
         setEnteredText, 
-        handleEnter 
+        handleEnter,
+        isLoading 
     }: ConsoleProps) => {
 
     // reusable styling
@@ -72,6 +74,9 @@ const Console = ({
                 }
                 {error &&
                     <p className='text-red-700'>{error}</p>
+                }
+                {isLoading &&
+                    <p className="text-[#7a7b7f]">Loading...</p>
                 }
                 {showHelp &&
                     <div className='text-[#7a7b7f] flex flex-col gap-5 md:gap-0 md:w-3/4'>
